@@ -3,6 +3,7 @@ import { LineChart } from 'react-native-charts-wrapper';
 import { View, Text, StyleSheet } from 'react-native';
 import axios from 'axios';
 import Cards from './Cards';
+import { create } from 'react-test-renderer';
 
 const Dashboard = () => {
   const [temperature, setTemperature] = useState([]);
@@ -25,7 +26,7 @@ const Dashboard = () => {
         y: parseFloat(feed.field1),
       }));
       const humidityData = feeds.map((feed) => ({
-        x: feed.entry,
+        x: feed.entry_id,
         y: parseFloat(feed.field2),
       }));
       setTemperature(temperatureData);
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#753979',
-    paddingHorizontal: 20,
+    paddingHorizontal: 1,
   },
   chartContainer: {    
     marginTop: 10,
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   chart: {
-    width: '90%',
+    width: '100%',
     height: 280,
     marginVertical: 5,
 
