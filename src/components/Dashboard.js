@@ -3,7 +3,6 @@ import { LineChart } from 'react-native-charts-wrapper';
 import { View, Text, StyleSheet } from 'react-native';
 import axios from 'axios';
 import Cards from './Cards';
-import { create } from 'react-test-renderer';
 
 const Dashboard = () => {
   const [temperature, setTemperature] = useState([]);
@@ -38,44 +37,58 @@ const Dashboard = () => {
 
   return (
     <View style={styles.container}>
-        <Cards />
-        <Text style={styles.chartTitle}>Temperatura</Text>
-        <LineChart
-          style={styles.chart}
-          data={{
-            dataSets: [
-              {
-                label: 'Temperatura',
-                values: temperature,
-              },
-            ],
-          }}
-          chartDescription={{ text: '' }}
-          xLabels={temperature.map((data) => data.x)}
-          yAxisSuffix="°C"
-          showLegend={true}
-          showAxis
-          showGrid
-        />
-        <Text style={styles.chartTitle}>Umidade</Text>
-        <LineChart
-          style={styles.chart}
-          data={{
-            dataSets: [
-              {
-                label: 'Umidade',
-                values: humidity,
-              },
-            ],
-          }}
-          chartDescription={{ text: '' }}
-          xLabels={humidity.map((data) => data.x)}
-          yAxisSuffix="%"
-          showLegend={false}
-          showAxis
-          showGrid
-        />
-      </View>
+      <Cards />
+      <Text style={styles.chartTitle}>Temperatura</Text>
+      <LineChart
+        style={styles.chart}
+        data={{
+          dataSets: [
+            {
+              label: 'Temperatura',
+              values: temperature,
+            },
+          ],
+        }}
+        chartDescription={{ text: '' }}
+        xLabels={temperature.map((data) => data.x)}
+        yAxisSuffix="°C"
+        showLegend={true}
+        showAxis
+        showGrid
+        xAxis={{
+          labelRotationAngle: 45, // Definindo a rotação dos rótulos em 45 graus
+        }}
+        yAxis={{
+          left: { enabled: true },
+          right: { enabled: false },
+        }}
+      />
+      <Text style={styles.chartTitle}>Umidade</Text>
+      <LineChart
+        style={styles.chart}
+        data={{
+          dataSets: [
+            {
+              label: 'Umidade',
+              values: humidity,
+            },
+          ],
+        }}
+        chartDescription={{ text: '' }}
+        xLabels={humidity.map((data) => data.x)}
+        yAxisSuffix="%"
+        showLegend={false}
+        showAxis
+        showGrid
+        xAxis={{
+          labelRotationAngle: 45, // Definindo a rotação dos rótulos em 45 graus
+        }}
+        yAxis={{
+          left: { enabled: true },
+          right: { enabled: false },
+        }}
+      />
+    </View>
   );
 };
 
@@ -89,7 +102,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#753979',
     paddingHorizontal: 1,
   },
-  chartContainer: {    
+  chartContainer: {
     marginTop: 10,
     width: '90%',
   },
@@ -103,7 +116,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 280,
     marginVertical: 5,
-
   },
 });
 
